@@ -9,10 +9,12 @@ public class Event {
 
     private String name;
     private String description;
+    private String location;
 
-    public Event(String name, String description) {
+    public Event(String name, String description, String location) {
         this.name = name;
         this.description = description;
+        this.location = location;
     }
 
     public String getName() {
@@ -29,6 +31,14 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override
