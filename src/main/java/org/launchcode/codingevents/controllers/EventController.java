@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Size;
+
 /**
  * Created by Chris Bay
  */
@@ -27,6 +29,7 @@ public class EventController {
     }
 
     @PostMapping("create")
+    @Size(min = 0, max = 500)
     public String processCreateEventForm(@ModelAttribute Event newEvent) {
         EventData.add(newEvent);
         return "redirect:";
