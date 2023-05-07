@@ -16,17 +16,23 @@ public class Event {
     @NotBlank(message = "Name is DEFINITELY required")
     @Size(min = 3, max = 50, message = "No less than three no more than 50")
     private String name;
+
     @Size(max = 500, message = "Descrip must be under five-hundo")
     private String description;
 
     @Email(message = "Invalid email, try again")
+    @NotBlank(message = "EMAIL REQUIREDDD")
     private String contactEmail;
 
     public Event(String name, String description, String contactEmail) {
+        this();
         this.name = name;
         this.description = description;
-        this.id = nextId;
         this.contactEmail = contactEmail;
+    }
+
+    public Event(){
+        this.id = nextId;
         nextId++;
     }
 

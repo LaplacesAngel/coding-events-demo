@@ -10,4 +10,5 @@ public class CodingEventsApplication {
 		SpringApplication.run(CodingEventsApplication.class, args);
 	}
 
+
 }
