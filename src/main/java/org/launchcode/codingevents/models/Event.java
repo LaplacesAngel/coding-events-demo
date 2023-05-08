@@ -1,8 +1,8 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jdk.jfr.BooleanFlag;
+
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 /**
@@ -24,11 +24,34 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    private EventType type;
+
+    @NotNull(message = "needs something, SOMETHING!")
+    @NotBlank(message = "c'mon...")
+    private String location;
+
+    //Add a field to collect information about whether an attendee must register for the event or not.
+    // For the purposes of validation practice, make this field only able to be marked as true.
+
+    @BooleanFlag
+    @AssertTrue
+    @NotNull
+    private Boolean mustRegister;
+
+    @NotNull(message = "gotta be something")
+    @Min(value = 1, message = "gotta be at least zero fam")
+    //@Positive(message="Number of attendees must be one or more.")
+    private Integer attendees;
+
+    public Event(String name, String description, String contactEmail, EventType type, String location, Boolean mustRegister, Integer attendees) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.type = type;
+        this.location = location;
+        this.mustRegister = mustRegister;
+        this.attendees = attendees;
     }
 
     public Event() {
@@ -58,6 +81,39 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getMustRegister() {
+        return mustRegister;
+    }
+
+    public void setMustRegister(Boolean mustRegister) {
+        this.mustRegister = mustRegister;
+    }
+
+
+    public Integer getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(Integer attendees) {
+        this.attendees = attendees;
     }
 
     public int getId() {
