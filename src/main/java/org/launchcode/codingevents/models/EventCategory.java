@@ -6,24 +6,16 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class EventCategory {
-    @Id
-    @GeneratedValue
-    private int id;
-
+public class EventCategory extends  AbstractEntity{
     private String name;
 
-    public EventCategory(int id, String name) {
-        this.id = id;
+    public EventCategory(String name) {
         this.name = name;
     }
 
     public EventCategory() {
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -33,18 +25,6 @@ public class EventCategory {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventCategory that = (EventCategory) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 
     @Override
     public String toString() {
