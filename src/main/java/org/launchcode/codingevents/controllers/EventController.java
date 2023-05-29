@@ -3,13 +3,16 @@ package org.launchcode.codingevents.controllers;
 import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * Created by Chris Bay
@@ -27,9 +30,26 @@ public class EventController {
     // want to findall, save, findbyid
 
     @GetMapping
-    public String displayAllEvents(Model model) {
-        model.addAttribute("title", "All Events");
-        model.addAttribute("events", eventRepository.findAll());
+    public String displayAllEvents(@RequestParam(required = false) Integer categoryId, Model model) {
+
+        if (categoryId == null) {
+            model.addAttribute("title", "All Events");
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+
+            Optional<EventCategory> results = eventCategoryRepository.findById(categoryId);
+
+            if (results.isEmpty()) {
+                model.addAttribute("title", "Event not found for category id " + categoryId);
+            } else {
+                EventCategory category = results.get();
+                model.addAttribute("title", "Events in category: " + category.getName());
+                model.addAttribute("events",category.getEvents());
+            }
+
+        }
+
+
         return "events/index";
     }
 
