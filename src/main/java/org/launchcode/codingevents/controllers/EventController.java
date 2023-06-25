@@ -23,6 +23,8 @@ import java.util.Optional;
 @RequestMapping("events")
 public class EventController {
 
+    //test comment
+
     @Autowired
     private EventRepository eventRepository;
 
